@@ -1,0 +1,16 @@
+fixture: 07-update-all-fields-null-description.yaml
+
+expected:
+  status: ok
+  result: planned
+  operation: update
+  changes:
+    ipv4:
+      from: 10.9.9.9/24
+      to: 172.31.70.65/32
+    description:
+      from: null
+      to: IPA2026-67070065
+    admin_state:
+      from: down
+      to: up

@@ -22,3 +22,11 @@ services:
       timeout: 10s
       retries: 3
       start_period: 30s
+  # Quick Tunnel: public HTTPS URL for Webex. Find it with `docker compose logs tunnel`.
+  # The URL changes on every restart; re-run scripts/register_webhook.py after that.
+  tunnel:
+    image: cloudflare/cloudflared:latest
+    command: tunnel --no-autoupdate --url http://webhook:8000
+    depends_on:
+      - webhook
+    restart: unless-stopped
