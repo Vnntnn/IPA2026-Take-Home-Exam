@@ -58,11 +58,8 @@ class WebexEventHandler:
             else:
                 result = self.processor(mentioned, None, self.bot_person_id)
         except Exception:
-            # Tell the room, then let the caller log it; temp file is already gone.
-            self.client.send_message(
-                room_id, json.dumps({'status': 'error', 'result': 'backend_failed'})
-            )
-            raise
+            log.exception('request failed')
+            result = {'status': 'error', 'result': 'backend_failed'}
 
         self.client.send_message(room_id, json.dumps(result))
         return result
